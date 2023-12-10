@@ -117,8 +117,9 @@ public class SoyBoyController : MonoBehaviour
             // 1
             input.x = Input.GetAxis("Horizontal");
             input.y = Input.GetAxis("Jump");
-            // 2
-            if (input.x > 0f)
+        animator.SetFloat("Speed", Mathf.Abs(input.x));
+        // 2
+        if (input.x > 0f)
             {
                 sr.flipX = false;
             }
@@ -127,22 +128,25 @@ public class SoyBoyController : MonoBehaviour
                 sr.flipX = true;
             }
 
-            if (input.y >= 1f)
-            {
-                jumpDuration += Time.deltaTime;
-            }
-            else
-            {
-                isJumping = false;
-                jumpDuration = 0f;
-            }
-            if (PlayerIsOnGround() && isJumping == false)
+        if (input.y >= 1f)
+        {
+            jumpDuration += Time.deltaTime;
+            animator.SetBool("IsJumping", true);
+        }
+        else
+        {
+            isJumping = false;
+            animator.SetBool("IsJumping", false);
+            jumpDuration = 0f;
+        }
+        if (PlayerIsOnGround() && isJumping == false)
             {
                 if (input.y > 0f)
                 {
                     isJumping = true;
                 }
-            }
+            animator.SetBool("IsOnWall", false);
+        }
             if (jumpDuration > jumpDurationThreshold) input.y = 0f;
         }
 
@@ -182,13 +186,23 @@ public class SoyBoyController : MonoBehaviour
             * acceleration, 0));
             // 4
             rb.velocity = new Vector2(xVelocity, yVelocity);
-            if (IsWallToLeftOrRight() && !PlayerIsOnGround()
- && input.y == 1)
-            {
-                rb.velocity = new Vector2(-GetWallDirection()
-                * speed * 0.75f, rb.velocity.y);
-            }
-            if (isJumping && jumpDuration < jumpDurationThreshold)
+        if (IsWallToLeftOrRight() && !PlayerIsOnGround() && input.y == 1)
+        {
+            rb.velocity = new Vector2(-GetWallDirection() * speed
+            * 0.75f, rb.velocity.y);
+            animator.SetBool("IsOnWall", false);
+            animator.SetBool("IsJumping", true);
+        }
+        else if (!IsWallToLeftOrRight())
+        {
+            animator.SetBool("IsOnWall", false);
+            animator.SetBool("IsJumping", true);
+        }
+        if (IsWallToLeftOrRight() && !PlayerIsOnGround())
+        {
+            animator.SetBool("IsOnWall", true);
+        }
+        if (isJumping && jumpDuration < jumpDurationThreshold)
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
             }

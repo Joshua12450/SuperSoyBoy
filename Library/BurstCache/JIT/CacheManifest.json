@@ -7,11 +7,11 @@
     },
     {
       "FullName": "Unity.2D.Animation.Editor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "LastWriteTime": "2023-12-10T22:48:41.7366039Z"
+      "LastWriteTime": "2023-12-10T23:30:33.1470916Z"
     },
     {
       "FullName": "Unity.2D.Common.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "LastWriteTime": "2023-12-10T22:48:41.7506919Z"
+      "LastWriteTime": "2023-12-10T23:30:33.1606385Z"
     },
     {
       "FullName": "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
@@ -19,7 +19,7 @@
     },
     {
       "FullName": "Unity.Mathematics, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "LastWriteTime": "2023-12-10T22:48:41.752694Z"
+      "LastWriteTime": "2023-12-10T23:30:33.1526023Z"
     },
     {
       "FullName": "netstandard, Version=2.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51",
@@ -27,7 +27,7 @@
     },
     {
       "FullName": "Unity.2D.SpriteShape.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "LastWriteTime": "2023-12-10T22:48:41.7326026Z"
+      "LastWriteTime": "2023-12-10T23:30:33.1526023Z"
     },
     {
       "FullName": "UnityEngine.SpriteShapeModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -35,15 +35,15 @@
     },
     {
       "FullName": "Unity.2D.Psdimporter.Editor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "LastWriteTime": "2023-12-10T22:48:41.7295983Z"
+      "LastWriteTime": "2023-12-10T23:30:33.1450875Z"
     },
     {
       "FullName": "Unity.2D.Aseprite.Common, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "LastWriteTime": "2023-12-10T22:48:41.7306022Z"
+      "LastWriteTime": "2023-12-10T23:30:33.1561286Z"
     },
     {
       "FullName": "Unity.Burst, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "LastWriteTime": "2023-12-10T22:48:41.7456363Z"
+      "LastWriteTime": "2023-12-10T23:30:33.1586376Z"
     },
     {
       "FullName": "UnityEditor.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -51,23 +51,23 @@
     },
     {
       "FullName": "Unity.2D.Animation.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "LastWriteTime": "2023-12-10T22:48:41.7496676Z"
+      "LastWriteTime": "2023-12-10T23:30:33.1536029Z"
     },
     {
       "FullName": "PsdPlugin, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "LastWriteTime": "2023-12-10T22:48:41.7255511Z"
-    },
-    {
-      "FullName": "Unity.2D.Common.Editor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "LastWriteTime": "2023-12-10T22:48:41.7416348Z"
+      "LastWriteTime": "2023-12-10T23:30:33.1475974Z"
     },
     {
       "FullName": "mscorlib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "LastWriteTime": "2023-09-27T08:41:24Z"
     },
     {
+      "FullName": "Unity.2D.Common.Editor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "LastWriteTime": "2023-12-10T23:30:33.1671511Z"
+    },
+    {
       "FullName": "Unity.2D.Aseprite.Editor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "LastWriteTime": "2023-12-10T22:48:41.7466365Z"
+      "LastWriteTime": "2023-12-10T23:30:33.1676587Z"
     }
   ],
   "Functions": [
@@ -131,9 +131,9 @@
       "LinkName": "98F0B94E81C56132",
       "AssemblyDependencyIndices": [
         9,
-        4,
         3,
         0,
+        4,
         10,
         5,
         11
@@ -188,6 +188,7 @@
       "AssemblyDependencyIndices": [
         0,
         13,
+        14,
         3
       ]
     },
@@ -209,7 +210,7 @@
       "LinkName": "FBD0B2A6246F6223",
       "AssemblyDependencyIndices": [
         0,
-        14,
+        15,
         3
       ]
     },
@@ -221,7 +222,6 @@
       "AssemblyDependencyIndices": [
         0,
         1,
-        15,
         3,
         2,
         4,
@@ -256,13 +256,13 @@
       "ModuleHash": "2c1e9a865771bf12345147cce1992623",
       "LinkName": "8115CAFF6B65630B",
       "AssemblyDependencyIndices": [
-        14,
-        10,
-        11,
+        15,
+        4,
         3,
         0,
-        4,
-        5
+        10,
+        5,
+        11
       ]
     },
     {
@@ -382,11 +382,11 @@
       "LinkName": "3BBA922C5BD340F0",
       "AssemblyDependencyIndices": [
         16,
+        11,
         3,
         0,
         10,
-        5,
-        11
+        5
       ]
     },
     {
@@ -396,9 +396,9 @@
       "LinkName": "62D0693A7DAE3BF2",
       "AssemblyDependencyIndices": [
         16,
+        10,
         3,
         0,
-        10,
         5,
         11
       ]
