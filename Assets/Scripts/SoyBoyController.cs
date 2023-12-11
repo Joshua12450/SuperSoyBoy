@@ -19,8 +19,13 @@ public class SoyBoyController : MonoBehaviour
     private float jumpDuration;
     public float airAccel = 3f;
     public float jump = 14f;
+    public AudioClip runClip;
+    public AudioClip jumpClip;
+    public AudioClip slideClip;
+    private AudioSource audioSource;
     void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         sr = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
@@ -32,6 +37,14 @@ public class SoyBoyController : MonoBehaviour
     {
 
     }
+
+    void PlayAudioClip(AudioClip clip)
+    {
+        if (audioSource != null && clip != null)
+        {
+            if (!audioSource.isPlaying) audioSource.PlayOneShot(clip);
+        }
+    }
 
     public bool PlayerIsOnGround()
     {
@@ -111,22 +124,22 @@ public class SoyBoyController : MonoBehaviour
             return 0;
         }
     }
-        // Update is called once per frame
-        void Update()
-        {
-            // 1
-            input.x = Input.GetAxis("Horizontal");
-            input.y = Input.GetAxis("Jump");
+    // Update is called once per frame
+    void Update()
+    {
+        // 1
+        input.x = Input.GetAxis("Horizontal");
+        input.y = Input.GetAxis("Jump");
         animator.SetFloat("Speed", Mathf.Abs(input.x));
         // 2
         if (input.x > 0f)
-            {
-                sr.flipX = false;
-            }
-            else if (input.x < 0f)
-            {
-                sr.flipX = true;
-            }
+        {
+            sr.flipX = false;
+        }
+        else if (input.x < 0f)
+        {
+            sr.flipX = true;
+        }
 
         if (input.y >= 1f)
         {
@@ -139,59 +152,67 @@ public class SoyBoyController : MonoBehaviour
             animator.SetBool("IsJumping", false);
             jumpDuration = 0f;
         }
-        if (PlayerIsOnGround() && isJumping == false)
+        if (PlayerIsOnGround() && !isJumping)
+        {
+            if (input.y > 0f)
             {
-                if (input.y > 0f)
-                {
-                    isJumping = true;
-                }
+                isJumping = true;
+                PlayAudioClip(jumpClip);
+            }
             animator.SetBool("IsOnWall", false);
+            if (input.x < 0f || input.x > 0f)
+            {
+                PlayAudioClip(runClip);
+            }
         }
-            if (jumpDuration > jumpDurationThreshold) input.y = 0f;
-        }
+        if (jumpDuration > jumpDurationThreshold) input.y = 0f;
+    }
 
-        void FixedUpdate()
+    void FixedUpdate()
+    {
+        // 1
+        var acceleration = 0f;
+        if (PlayerIsOnGround())
         {
-            // 1
-            var acceleration = 0f;
-            if (PlayerIsOnGround())
-            {
-                acceleration = accel;
-            }
-            else
-            {
-                acceleration = airAccel;
-            }
-            var xVelocity = 0f;
-            // 2
-            if (PlayerIsOnGround() && input.x == 0)
-            {
-                xVelocity = 0f;
-            }
-            else
-            {
-                xVelocity = rb.velocity.x;
-            }
-            // 3
-            var yVelocity = 0f;
-            if (PlayerIsTouchingGroundOrWall() && input.y == 1)
-            {
-                yVelocity = jump;
-            }
-            else
-            {
-                yVelocity = rb.velocity.y;
-            }
-            rb.AddForce(new Vector2(((input.x * speed) - rb.velocity.x)
-            * acceleration, 0));
-            // 4
-            rb.velocity = new Vector2(xVelocity, yVelocity);
-        if (IsWallToLeftOrRight() && !PlayerIsOnGround() && input.y == 1)
+            acceleration = accel;
+        }
+        else
         {
+            acceleration = airAccel;
+        }
+        var xVelocity = 0f;
+        // 2
+        if (PlayerIsOnGround() && input.x == 0)
+        {
+            xVelocity = 0f;
+        }
+        else
+        {
+            xVelocity = rb.velocity.x;
+        }
+        // 3
+        var yVelocity = 0f;
+        if (PlayerIsTouchingGroundOrWall() && input.y == 1)
+        {
+            yVelocity = jump;
+        }
+        else
+        {
+            yVelocity = rb.velocity.y;
+        }
+        rb.AddForce(new Vector2(((input.x * speed) - rb.velocity.x)
+        * acceleration, 0));
+        // 4
+        rb.velocity = new Vector2(xVelocity, yVelocity);
+        if (IsWallToLeftOrRight() && !PlayerIsOnGround()
+         && input.y == 1)
+        {
+
             rb.velocity = new Vector2(-GetWallDirection() * speed
             * 0.75f, rb.velocity.y);
             animator.SetBool("IsOnWall", false);
             animator.SetBool("IsJumping", true);
+            PlayAudioClip(jumpClip);
         }
         else if (!IsWallToLeftOrRight())
         {
@@ -201,10 +222,7 @@ public class SoyBoyController : MonoBehaviour
         if (IsWallToLeftOrRight() && !PlayerIsOnGround())
         {
             animator.SetBool("IsOnWall", true);
-        }
-        if (isJumping && jumpDuration < jumpDurationThreshold)
-            {
-                rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
-            }
+            PlayAudioClip(slideClip);
         }
     }
+}
